@@ -1,0 +1,15 @@
+ScreenManager:
+    current: "Screen2"
+    Screen1:
+    Screen2:
+
+<Screen1>:
+    name: "Screen1"
+    Button:
+        text: "Button @ Screen 1"
+        on_press: root.manager.current = "Screen2"
+<Screen2>:
+    name: "Screen2"
+    Button:
+        text: "Button @ Screen 2"
+        on_press: root.manager.current = "Screen1"

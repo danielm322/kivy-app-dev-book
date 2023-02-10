@@ -1,0 +1,32 @@
+BoxLayout:
+    CustomLabel:
+        text: "Hello"
+    Label:
+        text: "Second Label"
+
+# This modifies all instances of the Label class
+<CustomLabel@Label>:
+    color: 1,0,0,1
+    font_size: "50sp"
+
+# Listing 4
+#BoxLayout:
+#    Label:
+#        text: "Hello"
+#    Label:
+#        text: "Second Label"
+
+# This modifies all instances of the Label class
+#<Label>:
+#    color: 1,0,0,1
+#    font_size: "50sp"
+
+# Listing 2
+# Here the label properties are not transferred to the second label
+#BoxLayout:
+#    Label:
+#        text: "Hello"
+#        color: 1,0,0,1
+#        font_size: "50sp"
+#    Label:
+#        text: "Second Label"

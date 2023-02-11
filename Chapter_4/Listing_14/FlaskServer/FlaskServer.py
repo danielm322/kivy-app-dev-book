@@ -1,3 +1,5 @@
+import io
+
 import flask
 import PIL.Image
 import base64
@@ -26,7 +28,7 @@ def cam_size():
     return "OK"
 
 
-@app.route('/', methods = ['POST'])
+@app.route('/', methods=['POST'])
 def upload_file():
     global cam_width
     global cam_height
@@ -36,19 +38,23 @@ def upload_file():
 
     image = PIL.Image.frombytes(mode="RGBA", size=(cam_width, cam_height), data=file_to_upload)
     image = image.rotate(-90)
-    image.save('out.png')
 
     print('File Uploaded Successfully.')
+    # Convert now to bytes bc before the image was in pixels
+    img_byte_arr = io.BytesIO()
+    image.save(img_byte_arr, format='PNG')
+    img_byte_arr = img_byte_arr.getvalue()
 
-    f = open('out.png', 'rb')
-#    im_base64 = base64.b64encode(image.tobytes())
-    im_base64 = base64.b64encode(f.read())
+    # Then encode to base64
+    im_base64 = base64.b64encode(img_byte_arr)
 
-    html_code = '<html><head><meta http-equiv="refresh" content="1"><title>Displaying Uploaded Image</title></head><body><h1>Uploaded Image to the Flask Server</h1><img src="data:;base64,'+im_base64.decode('utf8')+'" alt="Uploaded Image at the Flask Server"/></body></html>'
+    html_code = '<html><head><meta http-equiv="refresh" content="1"><title>Displaying Uploaded ' \
+                'Image</title></head><body><h1>Uploaded Image to the Flask Server</h1><img src="data:;base64,' \
+                '' + im_base64.decode() + '" alt="Uploaded Image at the Flask Server"/></body></html>'
 
     # The HTML page is not required to be opened from the Python code but open it yourself externally.
-    html_url = os.getcwd()+"/templates/test.html"
-    f = open(html_url,'w')
+    html_url = os.getcwd() + "/test.html"
+    f = open(html_url, 'w')
     f.write(html_code)
     f.close()
 
@@ -59,6 +65,8 @@ def upload_file():
     return "SUCCESS"
 
 
-ip_address = sys.argv[1]  # "192.168.43.231"
+ip_address = sys.argv[1]  # "192.168.0.12"
+# ip_address = "0.0.0.0"
 port_number = int(sys.argv[2])  # 6666
+# port_number = 6666
 app.run(host=ip_address, port=port_number, debug=True, threaded=True)

@@ -2,7 +2,12 @@ import kivy.app
 import requests
 import kivy.clock
 import kivy.uix.screenmanager
+from kivy.utils import platform
 import threading
+
+if platform == "android":
+    from android.permissions import request_permissions, Permission
+    request_permissions([Permission.CAMERA])
 
 
 class Configure(kivy.uix.screenmanager.Screen):
@@ -37,12 +42,12 @@ class PycamApp(kivy.app.App):
 
     def upload_images(self, *args):
         self.num_images = self.num_images + 1
-        print("Uploading image", self.num_images)
+        # print("Uploading image", self.num_images)
 
         camera = self.root.screens[1].ids['camera']
 
-        print("Image Size ", camera.resolution[0], camera.resolution[1])
-        print("Image corner ", camera.x, camera.y)
+        # print("Image Size ", camera.resolution[0], camera.resolution[1])
+        # print("Image corner ", camera.x, camera.y)
 
         pixels_data = camera.texture.get_region(x=camera.x,
                                                 y=camera.y,
@@ -65,7 +70,12 @@ class PycamApp(kivy.app.App):
         except requests.exceptions.ConnectionError:
             self.root.screens[1].ids['capture'].text = "Connection Error! Make Sure Server is Active."
 
+    def build(self):
+        pass
 
-if __name__ == "__main__":
-    app = PycamApp()
-    app.run()
+
+# if __name__ == "__main__":
+#     app = PycamApp()
+#     app.run()
+app = PycamApp()
+app.run()

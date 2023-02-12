@@ -1,0 +1,19 @@
+FloatLayout:
+    on_touch_down: app.touch_down_handler(*args)
+    Image:
+        id: character_image
+        size_hint: (0.15, 0.15)
+        pos_hint: {'x': 0.2, 'y': 0.4}
+        allow_stretch: True
+        source: "0.png"
+        im_num: 0
+        on_im_num: app.change_char_im()
+    Button:
+        size_hint: (0.3, 0.3)
+        text: "Start Animation"
+        on_press: app.start_char_animation()
+    Button:
+        size_hint: (0.3, 0.3)
+        text: "Stop Animation"
+        pos_hint: {'x': 0.3}
+        on_press: app.stop_animation()

@@ -1,0 +1,9 @@
+#BoxLayout:  # BoxLayout does not listen to the width hint when using horizontal (default) orientation
+FloatLayout:
+    Button:
+        size_hint: (0.5, 0.5)
+        text: "First Button"
+    Button:
+        size_hint: (1/4, 1/4)
+        pos_hint: {'x': 0.75,'y': 0.75}
+        text: "Hello"

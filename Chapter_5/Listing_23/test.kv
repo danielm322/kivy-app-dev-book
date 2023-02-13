@@ -1,5 +1,16 @@
 FloatLayout:
     on_touch_down: app.touch_down_handler(*args)
+    canvas.before:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'bg.jpg'
+    Label:
+        id: num_coins_collected
+        size_hint: (0.1, 0.02)
+        pos_hint: {'x': 0.0, 'y': 0.97}
+        text: "Coins 0"
+        font_size: 20
     Image:
         id: monster_image
         size_hint: (0.15, 0.15)
@@ -17,3 +28,4 @@ FloatLayout:
         source: "0.png"
         im_num: 0
         on_im_num: app.change_char_im()
+        on_pos_hint: app.char_pos_hint()

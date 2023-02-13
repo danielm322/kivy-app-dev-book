@@ -1,0 +1,79 @@
+ScreenManager:
+    MainScreen:
+    Level1:
+    Level2:
+
+<MainScreen>:
+    name: "main"
+    BoxLayout:
+        Button:
+            text: "Go to Level 1"
+            on_press: app.root.current="level1"
+        Button:
+            text: "Go to Level 2"
+            on_press: app.root.current="level2"
+
+<Level1>:
+    name: "level1"
+    on_pre_enter: app.screen_on_pre_enter(1)
+    on_enter: app.screen_on_enter(1)
+    FloatLayout:
+        id: layout_lvl1
+        on_touch_down: app.touch_down_handler(1, args)
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "graphics/levels-bg/bg_lvl1.jpg"
+        NumCollectedCoins:
+            id: num_coins_collected_lvl1
+        Monster:
+            id: monster_image_lvl1
+        Character:
+            id: character_image_lvl1
+
+<Level2>:
+    name: "level2"
+    on_pre_enter: app.screen_on_pre_enter(2)
+    on_enter: app.screen_on_enter(2)
+    FloatLayout:
+        id: layout_lvl2
+        on_touch_down: app.touch_down_handler(2, args)
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "graphics/levels-bg/bg_lvl2.jpg"
+        NumCollectedCoins:
+            id: num_coins_collected_lvl2
+        Monster:
+            id: monster_image_lvl2
+        Character:
+            id: character_image_lvl2
+
+<NumCollectedCoins@Label>:
+    id: num_coins_collected
+    size_hint: (0.18, 0.08)
+    pos_hint: {'x': 0.0, 'y': 0.90}
+    text: "Coins 0"
+    font_size: 20
+
+<Monster@Image>:
+    id: monster_image
+    size_hint: (0.15, 0.15)
+    pos_hint: {'x': 0.8, 'y': 0.8}
+    source: "graphics/entities/10.png"
+    im_num: 10
+    allow_stretch: True
+    #on_im_num: app.change_monst_im(self)
+    #on_pos_hint: app.monst_pos_hint(self)
+
+<Character@Image>:
+    id: character_image
+    size_hint: (0.15, 0.15)
+    pos_hint: {'x': 0.2, 'y': 0.6}
+    source: "graphics/entities/0.png"
+    im_num: 0
+    allow_stretch: True
+    on_im_num: app.change_char_im(self)
+    on_pos_hint: app.char_pos_hint(self)

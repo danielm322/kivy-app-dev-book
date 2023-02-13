@@ -5,7 +5,7 @@ import kivy.animation
 import kivy.uix.label
 import kivy.core.audio
 import os
-os.environ['KIVY_AUDIO'] = 'avplayer'
+
 
 class TestApp(kivy.app.App):
     character_killed = False

@@ -16,6 +16,7 @@ ScreenManager:
 <Level1>:
     name: "level1"
     on_pre_enter: app.screen_on_pre_enter(1)
+    on_pre_leave: app.screen_on_pre_leave(1)
     on_enter: app.screen_on_enter(1)
     FloatLayout:
         id: layout_lvl1
@@ -35,6 +36,7 @@ ScreenManager:
 <Level2>:
     name: "level2"
     on_pre_enter: app.screen_on_pre_enter(2)
+    on_pre_leave: app.screen_on_pre_leave(2)
     on_enter: app.screen_on_enter(2)
     FloatLayout:
         id: layout_lvl2

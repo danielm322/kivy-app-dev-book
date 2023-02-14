@@ -2,6 +2,7 @@ ScreenManager:
     MainScreen:
     Level1:
     Level2:
+    Level3:
 
 <MainScreen>:
     name: "main"
@@ -12,10 +13,14 @@ ScreenManager:
         Button:
             text: "Go to Level 2"
             on_press: app.root.current="level2"
+        Button:
+            text: "Go to Level 3"
+            on_press: app.root.current="level3"
 
 <Level1>:
     name: "level1"
     on_pre_enter: app.screen_on_pre_enter(1)
+    on_pre_leave: app.screen_on_pre_leave(1)
     on_enter: app.screen_on_enter(1)
     FloatLayout:
         id: layout_lvl1
@@ -28,13 +33,16 @@ ScreenManager:
         NumCollectedCoins:
             id: num_coins_collected_lvl1
         Monster:
-            id: monster_image_lvl1
+            id: monster1_image_lvl1
+            monst_anim_duration_low: 1.0
+            monst_anim_duration_high: 1.6
         Character:
             id: character_image_lvl1
 
 <Level2>:
     name: "level2"
     on_pre_enter: app.screen_on_pre_enter(2)
+    on_pre_leave: app.screen_on_pre_leave(2)
     on_enter: app.screen_on_enter(2)
     FloatLayout:
         id: layout_lvl2
@@ -47,9 +55,37 @@ ScreenManager:
         NumCollectedCoins:
             id: num_coins_collected_lvl2
         Monster:
-            id: monster_image_lvl2
+            id: monster1_image_lvl2
+            monst_anim_duration_low: 1.0
+            monst_anim_duration_high: 1.6
         Character:
             id: character_image_lvl2
+
+<Level3>:
+    name: "level3"
+    on_pre_enter: app.screen_on_pre_enter(3)
+    on_pre_leave: app.screen_on_pre_leave(3)
+    on_enter: app.screen_on_enter(3)
+    FloatLayout:
+        id: layout_lvl3
+        on_touch_down: app.touch_down_handler(3, args)
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "graphics/levels-bg/bg_lvl3.jpg"
+        NumCollectedCoins:
+            id: num_coins_collected_lvl3
+        Monster:
+            id: monster1_image_lvl3
+            monst_anim_duration_low: 1.0
+            monst_anim_duration_high: 1.6
+        Monster:
+            id: monster2_image_lvl3
+            monst_anim_duration_low: 1.0
+            monst_anim_duration_high: 2.0
+        Character:
+            id: character_image_lvl3
 
 <NumCollectedCoins@Label>:
     id: num_coins_collected
@@ -77,3 +113,5 @@ ScreenManager:
     allow_stretch: True
     on_im_num: app.change_char_im(self)
     on_pos_hint: app.char_pos_hint(self)
+    start_im_num: 0
+    end_im_num: 7
